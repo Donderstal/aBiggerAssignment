@@ -26,37 +26,16 @@
             </ul>
         </div>
         <!--Weather - Top Row-->
-        <div id="topRowDiv" class="row col-10 offset-1 border-top border-right border-left">
+        <div id="topRowDiv" class="row col-12 border-top border-right border-left">
                 Weather - top row
         </div>
         <!--Weather - Graph -->
-        <div id="graphDiv" class="row col-10 offset-1 border-bottom border-right border-left mb-4">
-                <canvas id="myChart" width="400" height="400"></canvas>
+        <div id="graphDiv" class="row col-12 border-bottom border-right border-left mb-4">
+                <canvas id="myChart" width="400" height="200"></canvas>
         </div>
-        
-        <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'line',
-
-            // The data for our dataset
-            data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July"],
-                datasets: [{
-                    label: "My First dataset",
-                    backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    data: [0, 10, 5, 2, 20, 30, 45],
-                }]
-            },
-
-            // Configuration options go here
-            options: {}
-        });
-        </script>
     </div>
     <script src="/library/jquery/jquery.min.js"></script>
     <script src="/library/bootstrap/js/bootstrap.min.js"></script>
     <script src="/public/js/script.js"></script>
+    <script src="/public/js/chart.js"></script>
 </body>
