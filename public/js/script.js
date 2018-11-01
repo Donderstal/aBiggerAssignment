@@ -63,6 +63,7 @@ function displayTopRowData(apiList) {
     imageRow.innerHTML = ""
     dateRow.innerHTML = ""
     let index = 0
+    const timeArray = []
     apiList.forEach( e => {
         const DateTimeText = e.dt_txt
         let eDate = DateTimeText.split(' ')[0]
@@ -70,8 +71,11 @@ function displayTopRowData(apiList) {
         displayTime(eTime)
         displayIcons(e.weather[0].icon)
         displayDate(eDate, eTime, index)
+        timeArray.push(eTime)
         index +=1
     })
+    chart.data.labels = timeArray
+    chart.update()
 }
 
 function getTemperatures(apiList) {
