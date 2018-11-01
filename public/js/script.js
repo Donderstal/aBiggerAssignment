@@ -1,3 +1,11 @@
+$( document ).ready(
+    adamAjax(),
+)
+
+function classChanger(id) {
+    const activeElement = document.getElementById(id)
+    activeElement.setAttribute("class", "active")
+}
 
 function retrieveAPIData(api) {
     const list = api.list
@@ -69,6 +77,7 @@ function displayTopRowData(apiList) {
 
 
 function adamAjax() {
+    classChanger("adamButton")
     $.ajax({
         method: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=2759794&appid=d4daeba3e355348ac9050efcae9375ca',
@@ -83,6 +92,7 @@ function adamAjax() {
 }
 
 function moscowAjax() {
+    classChanger("moscowButton")
     $.ajax({
         method: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=5601538&appid=d4daeba3e355348ac9050efcae9375ca',
@@ -97,6 +107,7 @@ function moscowAjax() {
 }
 
 function newYorkAjax() {
+    classChanger("newYorkButton")
     $.ajax({
         method: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=5128581&appid=d4daeba3e355348ac9050efcae9375ca',

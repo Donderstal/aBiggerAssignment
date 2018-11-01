@@ -14,22 +14,22 @@
         <!--Buttons-->
         <div class="row col-10 offset-1 mt-2">
             <ul class="nav nav-tabs">
-                <li class="nav-item">
+                <li class="nav-item"
+                id="adamButton">
                     <a 
-                    id="adamButton"
-                    class="nav-link active" 
+                    class="nav-link" 
                     onclick="adamAjax()"
                     >Amsterdam</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item"
+                id="moscowButton">
                     <a
-                    id="moscowButton" 
                     class="nav-link" 
                     onclick="moscowAjax()">Moscow</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item"
+                id="newYorkButton">
                     <a 
-                    id="newYorkButton"
                     class="nav-link" 
                     onclick="newYorkAjax()">New York</a>
                 </li>
@@ -47,7 +47,7 @@
         </div>
         <!--Weather - Graph -->
         <div id="graphDiv" class="row col-12 border-bottom border-right border-left mb-2">
-                <canvas id="myChart" width="400" height="200"></canvas>
+                <canvas id="myChart" width="400" height="150"></canvas>
         </div>
     </div>
     <script src="/library/jquery/jquery.min.js"></script>
