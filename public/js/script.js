@@ -75,13 +75,14 @@ function displayTopRowData(apiList) {
 }
 
 function getTemperatures(apiList) {
-    console.log(apiList)
     const tempArray = []
     apiList.forEach(e => {
-        tempCelsius = (e.main.temp - 273.15)
+        tempCelsius = Math.round(e.main.temp - 273.15)
         tempArray.push(tempCelsius)
     })
-    console.log(tempArray)
+    console.log(chart)
+    chart.data.datasets[0].data = tempArray
+    chart.update()
 }
 
 
@@ -92,7 +93,7 @@ function adamAjax() {
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=2759794&appid=d4daeba3e355348ac9050efcae9375ca',
         success: function(response) {
             const APIArray = retrieveAPIData(response)
-            
+            getTemperatures(APIArray)
             displayTopRowData(APIArray)
         },
         error: function() {
@@ -107,9 +108,7 @@ function moscowAjax() {
         method: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=5601538&appid=d4daeba3e355348ac9050efcae9375ca',
         success: function(response) {
-            console.log(response)
             const APIArray = retrieveAPIData(response)
-            console.log(APIArray)
             getTemperatures(APIArray)
             displayTopRowData(APIArray)
         },
@@ -126,6 +125,7 @@ function newYorkAjax() {
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=5128581&appid=d4daeba3e355348ac9050efcae9375ca',
         success: function(response) {
             const APIArray = retrieveAPIData(response)
+            getTemperatures(APIArray)
             displayTopRowData(APIArray)
         },
         error: function() {
