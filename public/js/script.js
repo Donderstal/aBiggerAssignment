@@ -1,6 +1,6 @@
-$( document ).ready(
-    adamAjax(),
-)
+/* $( document ).ready(
+    adam(status)
+) */
 
 function classChanger(id) {
     const activeElement = document.getElementById(id)
@@ -28,13 +28,13 @@ function displayTime(time) {
 
 function displayDate(date, time, index) {
     var weekDays = new Array(7)
-        weekDays[0] = "Sun"
-        weekDays[1] = "Mon"
-        weekDays[2] = "Tue"
-        weekDays[3] = "Wed"
-        weekDays[4] = "Thu"
-        weekDays[5] = "Fri"
-        weekDays[6] = "Sat"
+    weekDays[0] = "Sun"
+    weekDays[1] = "Mon"
+    weekDays[2] = "Tue"
+    weekDays[3] = "Wed"
+    weekDays[4] = "Thu"
+    weekDays[5] = "Fri"
+    weekDays[6] = "Sat"
     dateArray = date.split('-')
     weekDaysDate = new Date(dateArray[0], (dateArray[1] - 1), dateArray[2])
     weekDay = weekDays[weekDaysDate.getDay()]
@@ -84,56 +84,72 @@ function getTemperatures(apiList) {
         tempCelsius = Math.round(e.main.temp - 273.15)
         tempArray.push(tempCelsius)
     })
-    console.log(chart)
     chart.data.datasets[0].data = tempArray
     chart.update()
 }
 
-
-function adamAjax() {
+function adamAjax(status) {
     classChanger("adamButton")
     $.ajax({
         method: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/forecast?id=2759794&appid=d4daeba3e355348ac9050efcae9375ca',
+        url: 'http://api.openweathermap.org/data/2.5/forecast?id=2759794&appid=9a7f046e8334b9ccd2878162b35dc767',
         success: function(response) {
             const APIArray = retrieveAPIData(response)
             getTemperatures(APIArray)
             displayTopRowData(APIArray)
         },
-        error: function() {
+        error: function(response) {
             console.log(response)
         }
     })
+    console.log('succesAdam!')
 }
 
 function moscowAjax() {
     classChanger("moscowButton")
     $.ajax({
         method: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/forecast?id=5601538&appid=d4daeba3e355348ac9050efcae9375ca',
+        url: 'http://api.openweathermap.org/data/2.5/forecast?id=5601538&appid=9a7f046e8334b9ccd2878162b35dc767',
         success: function(response) {
             const APIArray = retrieveAPIData(response)
             getTemperatures(APIArray)
             displayTopRowData(APIArray)
         },
-        error: function() {
+        error: function(response) {
             console.log(response)
         }
     })
+    console.log('succesMoscow!')
 }
 
 function newYorkAjax() {
     classChanger("newYorkButton")
     $.ajax({
         method: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/forecast?id=5128581&appid=d4daeba3e355348ac9050efcae9375ca',
+        url: 'http://api.openweathermap.org/data/2.5/forecast?id=5128581&appid=9a7f046e8334b9ccd2878162b35dc767',
         success: function(response) {
             const APIArray = retrieveAPIData(response)
             getTemperatures(APIArray)
             displayTopRowData(APIArray)
         },
-        error: function() {
+        error: function(response) {
             console.log(response)
         }
     })
+}
+
+function adam(){
+    /* adamAjax() */
+    console.log('hoiA!')
+    console.log()
+}
+
+function moscow(){
+   /*  moscowAjax() */
+    console.log('hoiM!')
+}
+
+function newYork(){
+    /* newYorkAjax() */
+    console.log('hoiNY!')
 }

@@ -18,25 +18,26 @@
                 id="adamButton">
                     <a 
                     class="nav-link" 
-                    onclick="adamAjax()"
+                    onclick="adam()"
                     >Amsterdam</a>
                 </li>
                 <li class="nav-item"
                 id="moscowButton">
                     <a
                     class="nav-link" 
-                    onclick="moscowAjax()">Moscow</a>
+                    onclick="moscow()">Moscow</a>
                 </li>
                 <li class="nav-item"
                 id="newYorkButton">
                     <a 
                     class="nav-link" 
-                    onclick="newYorkAjax()">New York</a>
+                    onclick="newYork()">New York</a>
                 </li>
             </ul>
         </div>
         <!--Weather - Top Row-->
-        <div id="dateRow" class="row col-12 border-top border-right border-left pb-2 mb-2">
+        <div id="dateRow" class="row col-12 border-top border-right border-left pb-2 pt-2
+        ">
         </div>
         <div id="timeRow" class="row col-12 border-right border-left pb-2">
                 
@@ -48,7 +49,7 @@
             <hr>
         </div>
         <!--Weather - Graph -->
-        <div id="graphDiv" class="row col-12 border mb-2">
+        <div id="graphDiv" class="row col-12 border mb-2 p-4">
                 <canvas id="myChart" width="400" height="150"></canvas>
         </div>
     </div>
