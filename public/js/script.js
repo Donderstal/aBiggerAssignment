@@ -1,6 +1,28 @@
-/* $( document ).ready(
-    adam(status)
-) */
+$( document ).ready(
+    setTimeout(adam, 1000),
+)
+
+const statusObject = {
+    adam: false,
+    moscow: false,
+    newYork: false
+}
+
+function Interval() {
+    if (statusObject.adam == true) {
+        interval = setInterval(testLog, 1000)
+    }
+    else if (statusObject.moscow == true) {
+        clearInterval(interval)
+    }
+    else if (statusObject.newYork == true) {
+
+    }
+}
+
+function testLog(){
+    console.log('test!')
+}
 
 function classChanger(id) {
     const activeElement = document.getElementById(id)
@@ -27,14 +49,7 @@ function displayTime(time) {
 }
 
 function displayDate(date, time, index) {
-    var weekDays = new Array(7)
-    weekDays[0] = "Sun"
-    weekDays[1] = "Mon"
-    weekDays[2] = "Tue"
-    weekDays[3] = "Wed"
-    weekDays[4] = "Thu"
-    weekDays[5] = "Fri"
-    weekDays[6] = "Sat"
+    var weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
     dateArray = date.split('-')
     weekDaysDate = new Date(dateArray[0], (dateArray[1] - 1), dateArray[2])
     weekDay = weekDays[weekDaysDate.getDay()]
@@ -42,7 +57,8 @@ function displayDate(date, time, index) {
     const span = document.createElement('span')
     span.classList.add('timeSpan')
     const spanText = document.createTextNode(weekDay + '\n' + date)
-    if (time == 03 || index == 0) {
+    console.log(time)
+    if (time == 03 || time == 00 || index == 0) {
         span.appendChild(spanText)
     } 
     dateRow.appendChild(span)
@@ -88,7 +104,7 @@ function getTemperatures(apiList) {
     chart.update()
 }
 
-function adamAjax(status) {
+function adamAjax() {
     classChanger("adamButton")
     $.ajax({
         method: 'GET',
@@ -139,17 +155,28 @@ function newYorkAjax() {
 }
 
 function adam(){
-    /* adamAjax() */
+    statusObject.adam = true
+    statusObject.moscow = false
+    statusObject.newYork = false
+        /* adamAjax() */
+    Interval()
     console.log('hoiA!')
-    console.log()
 }
 
 function moscow(){
+    statusObject.adam = false
+    statusObject.moscow = true
+    statusObject.newYork = false
    /*  moscowAjax() */
+   Interval()
     console.log('hoiM!')
 }
 
 function newYork(){
+    statusObject.adam = false
+    statusObject.moscow = false
+    statusObject.newYork = true
     /* newYorkAjax() */
+    Interval()
     console.log('hoiNY!')
 }
