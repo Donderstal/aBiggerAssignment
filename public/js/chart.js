@@ -7,7 +7,7 @@ var chart = new Chart(ctx, {
     data: {
         labels: [],
         datasets: [{
-            label: "The Weather",
+            label: "",
             backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             fill: false,
@@ -18,13 +18,26 @@ var chart = new Chart(ctx, {
 
     // Configuration options go here
     options: {
+        legend: {
+            display: false
+        },
         scales: {
             yAxes: [{
                 ticks: {
                     suggestedMin: -50,
                     suggestedMax: 50
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: 'degrees Celsius'
                 }
-            }]
+            }],
+            xAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'time'
+                }
+            }],
         }
     }
 });
