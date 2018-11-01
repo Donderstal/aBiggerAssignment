@@ -5,6 +5,34 @@
     <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
+    <div class="container">
+        <!--Title-->
+        <div class="row col-10 offset-1 mt-4">
+            Your five-day weather forcast
+        </div>
+        <!--Buttons-->
+        <div class="row col-10 offset-1 mt-4">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" onclick="adamAjax()">Amsterdam</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" onclick="moscowAjax()">Moscow</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link onclick="newYorkAjax()">New York</a>
+                </li>
+            </ul>
+        </div>
+        <!--Weather - Top Row-->
+        <div class="row col-10 offset-1 border-top border-right border-left">
+                Weather - top row
+        </div>
+        <!--Weather - Graph -->
+        <div class="row col-10 offset-1 border-bottom border-right border-left">
+                Weather - graph
+        </div>
+    </div>
     <script src="/library/jquery/jquery.min.js"></script>
     <script src="/library/bootstrap/js/bootstrap.min.js"></script>
     <script src="/public/js/script.js"></script>
