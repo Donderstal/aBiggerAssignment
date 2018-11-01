@@ -10,33 +10,60 @@ function retrieveAPIData(api) {
     return newArray
 }
 
-function displayTime(eTime) {
-    const TimeRow = document.getElementById('timeRow')
-    const Span = document.createElement('span')
-    Span.classList.add('timeSpan')
-    const SpanText = document.createTextNode(eTime)
-    Span.appendChild(SpanText)
-    TimeRow.appendChild(Span)
+function displayTime(time) {
+    const span = document.createElement('span')
+    span.classList.add('timeSpan')
+    const spanText = document.createTextNode(time)
+    span.appendChild(spanText)
+    timeRow.appendChild(span)
+}
+
+function displayDate(date, time, index) {
+    var weekDays = new Array(7)
+        weekDays[0] = "Sun"
+        weekDays[1] = "Mon"
+        weekDays[2] = "Tue"
+        weekDays[3] = "Wed"
+        weekDays[4] = "Thu"
+        weekDays[5] = "Fri"
+        weekDays[6] = "Sat"
+    dateArray = date.split('-')
+    weekDaysDate = new Date(dateArray[0], (dateArray[1] - 1), dateArray[2])
+    weekDay = weekDays[weekDaysDate.getDay()]
+    console.log(weekDay)
+    date = date.substring(date.indexOf("-") + 1)
+    const span = document.createElement('span')
+    span.classList.add('timeSpan')
+    const spanText = document.createTextNode(weekDay + '\n' + date)
+    if (time == 03 || index == 0) {
+        span.appendChild(spanText)
+    } 
+    dateRow.appendChild(span)
 }
 
 function displayIcons(icon) {
-    const imageRow = document.getElementById('imageRow')
     const img = document.createElement('img')
     img.classList.add('timeSpan')
     img.setAttribute("src", 'http://openweathermap.org/img/w/' + icon + '.png')
     imageRow.appendChild(img)
 }
 
-function getDateAndTime(apiList) {
+function displayTopRowData(apiList) {
+    const timeRow = document.getElementById('timeRow')
+    const imageRow = document.getElementById('imageRow')
+    const dateRow = document.getElementById('dateRow')
+    timeRow.innerHTML = ""
+    imageRow.innerHTML = ""
+    dateRow.innerHTML = ""
+    let index = 0
     apiList.forEach( e => {
         const DateTimeText = e.dt_txt
-        const eDate = DateTimeText.split(' ')[0]
+        let eDate = DateTimeText.split(' ')[0]
         const eTime = DateTimeText.split(' ')[1].split(':')[0]
         displayTime(eTime)
         displayIcons(e.weather[0].icon)
-        console.log(e.weather[0].icon)
-/*         console.log(eDate)
-        console.log(eTime) */
+        displayDate(eDate, eTime, index)
+        index +=1
     })
 }
 
@@ -46,11 +73,8 @@ function adamAjax() {
         method: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=2759794&appid=d4daeba3e355348ac9050efcae9375ca',
         success: function(response) {
-/*             console.log(response.list[0].dt_txt)
-            document.getElementById("ajaxTest").innerHTML = response.list[0].dt_txt */
             const APIArray = retrieveAPIData(response)
-            console.log(APIArray[0])
-            getDateAndTime(APIArray)
+            displayTopRowData(APIArray)
         },
         error: function() {
             console.log(response)
@@ -63,7 +87,8 @@ function moscowAjax() {
         method: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=5601538&appid=d4daeba3e355348ac9050efcae9375ca',
         success: function(response) {
-            console.log(response)
+            const APIArray = retrieveAPIData(response)
+            displayTopRowData(APIArray)
         },
         error: function() {
             console.log(response)
@@ -76,7 +101,8 @@ function newYorkAjax() {
         method: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=5128581&appid=d4daeba3e355348ac9050efcae9375ca',
         success: function(response) {
-            console.log(response)
+            const APIArray = retrieveAPIData(response)
+            displayTopRowData(APIArray)
         },
         error: function() {
             console.log(response)

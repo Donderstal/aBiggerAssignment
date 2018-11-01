@@ -1,4 +1,5 @@
 .timeSpan {
     text-align: center;
-    width: 5%
+    width: 5%;
+    white-space: pre;
 }
