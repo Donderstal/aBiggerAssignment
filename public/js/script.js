@@ -1,13 +1,23 @@
 
 function retrieveAPIData(api) {
-    let list = api.list
-    let newArray = []
+    const list = api.list
+    const newArray = []
     for (i = 0; i < list.length; i++)  {
         if (i % 2 == 0) {
             newArray.push(list[i])
         }
     }
     return newArray
+}
+
+function getDateAndTime(apiList) {
+    apiList.forEach( e => {
+        const DateTimeText = e.dt_txt
+        const eDate = DateTimeText.split(' ')[0]
+        const eTime = DateTimeText.split(' ')[1].split(':')[0]
+        console.log(eDate)
+        console.log(eTime)
+    })
 }
 
 function adamAjax() {
@@ -17,7 +27,9 @@ function adamAjax() {
         success: function(response) {
 /*             console.log(response.list[0].dt_txt)
             document.getElementById("ajaxTest").innerHTML = response.list[0].dt_txt */
-            console.log(retrieveAPIData(response))
+            const APIArray = retrieveAPIData(response)
+            console.log(APIArray[0])
+            getDateAndTime(APIArray)
         },
         error: function() {
             console.log(response)
