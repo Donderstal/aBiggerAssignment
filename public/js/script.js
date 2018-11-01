@@ -38,7 +38,6 @@ function displayDate(date, time, index) {
     dateArray = date.split('-')
     weekDaysDate = new Date(dateArray[0], (dateArray[1] - 1), dateArray[2])
     weekDay = weekDays[weekDaysDate.getDay()]
-    console.log(weekDay)
     date = date.substring(date.indexOf("-") + 1)
     const span = document.createElement('span')
     span.classList.add('timeSpan')
@@ -75,6 +74,16 @@ function displayTopRowData(apiList) {
     })
 }
 
+function getTemperatures(apiList) {
+    console.log(apiList)
+    const tempArray = []
+    apiList.forEach(e => {
+        tempCelsius = (e.main.temp - 273.15)
+        tempArray.push(tempCelsius)
+    })
+    console.log(tempArray)
+}
+
 
 function adamAjax() {
     classChanger("adamButton")
@@ -83,6 +92,7 @@ function adamAjax() {
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=2759794&appid=d4daeba3e355348ac9050efcae9375ca',
         success: function(response) {
             const APIArray = retrieveAPIData(response)
+            
             displayTopRowData(APIArray)
         },
         error: function() {
@@ -97,7 +107,10 @@ function moscowAjax() {
         method: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=5601538&appid=d4daeba3e355348ac9050efcae9375ca',
         success: function(response) {
+            console.log(response)
             const APIArray = retrieveAPIData(response)
+            console.log(APIArray)
+            getTemperatures(APIArray)
             displayTopRowData(APIArray)
         },
         error: function() {
