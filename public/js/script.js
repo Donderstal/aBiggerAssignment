@@ -3,7 +3,8 @@ function adamAjax() {
         method: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/forecast?id=2759794&appid=d4daeba3e355348ac9050efcae9375ca',
         success: function(response) {
-            console.log(response)
+            console.log(response.list[0].dt_txt)
+            document.getElementById("ajaxTest").innerHTML = response.list[0].dt_txt
         },
         error: function() {
             console.log(response)
