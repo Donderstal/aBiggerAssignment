@@ -19,14 +19,24 @@ function displayTime(eTime) {
     TimeRow.appendChild(Span)
 }
 
+function displayIcons(icon) {
+    const imageRow = document.getElementById('imageRow')
+    const img = document.createElement('img')
+    img.classList.add('timeSpan')
+    img.setAttribute("src", 'http://openweathermap.org/img/w/' + icon + '.png')
+    imageRow.appendChild(img)
+}
+
 function getDateAndTime(apiList) {
     apiList.forEach( e => {
         const DateTimeText = e.dt_txt
         const eDate = DateTimeText.split(' ')[0]
         const eTime = DateTimeText.split(' ')[1].split(':')[0]
         displayTime(eTime)
-        console.log(eDate)
-        console.log(eTime)
+        displayIcons(e.weather[0].icon)
+        console.log(e.weather[0].icon)
+/*         console.log(eDate)
+        console.log(eTime) */
     })
 }
 
