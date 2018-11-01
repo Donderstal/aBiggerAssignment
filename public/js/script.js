@@ -10,15 +10,26 @@ function retrieveAPIData(api) {
     return newArray
 }
 
+function displayTime(eTime) {
+    const TimeRow = document.getElementById('timeRow')
+    const Span = document.createElement('span')
+    Span.classList.add('timeSpan')
+    const SpanText = document.createTextNode(eTime)
+    Span.appendChild(SpanText)
+    TimeRow.appendChild(Span)
+}
+
 function getDateAndTime(apiList) {
     apiList.forEach( e => {
         const DateTimeText = e.dt_txt
         const eDate = DateTimeText.split(' ')[0]
         const eTime = DateTimeText.split(' ')[1].split(':')[0]
+        displayTime(eTime)
         console.log(eDate)
         console.log(eTime)
     })
 }
+
 
 function adamAjax() {
     $.ajax({
