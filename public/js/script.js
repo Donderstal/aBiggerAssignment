@@ -1,40 +1,34 @@
 $( document ).ready(
-    setTimeout(adam, 1000),
+    setTimeout(adam, 100),
 )
 
-const statusObject = {
-    adam: false,
-    moscow: false,
-    newYork: false
-}
+let status
 
 function Interval() {
-    if (statusObject.adam == true) {
-        interval = setInterval(testLog, 1000)
+    let interval
+    clearInterval(interval)
+    if (status == 'adam') {
+        interval = setInterval(function(){
+            ajaxMaker(status)
+        }, 600000)
     }
-    else if (statusObject.moscow == true) {
-        clearInterval(interval)
+    else if (status == 'moscow') {
+        interval = setInterval(function(){
+            ajaxMaker(status)
+        }, 600000)
     }
-    else if (statusObject.newYork == true) {
-
+    else if (status == 'newYork') {
+        interval = setInterval(function(){
+            ajaxMaker(status)
+        }, 600000)
     }
-}
-
-function testLog(){
-    console.log('test!')
-}
-
-function classChanger(id) {
-    const activeElement = document.getElementById(id)
-    activeElement.setAttribute("class", "active")
 }
 
 function retrieveAPIData(api) {
-    const list = api.list
     const newArray = []
-    for (i = 0; i < list.length; i++)  {
+    for (i = 0; i < api.list.length; i++)  {
         if (i % 2 == 0) {
-            newArray.push(list[i])
+            newArray.push(api.list[i])
         }
     }
     return newArray
@@ -49,7 +43,7 @@ function displayTime(time) {
 }
 
 function displayDate(date, time, index) {
-    var weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
+    const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     dateArray = date.split('-')
     weekDaysDate = new Date(dateArray[0], (dateArray[1] - 1), dateArray[2])
     weekDay = weekDays[weekDaysDate.getDay()]
@@ -57,7 +51,6 @@ function displayDate(date, time, index) {
     const span = document.createElement('span')
     span.classList.add('timeSpan')
     const spanText = document.createTextNode(weekDay + '\n' + date)
-    console.log(time)
     if (time == 03 || time == 00 || index == 0) {
         span.appendChild(spanText)
     } 
@@ -104,79 +97,45 @@ function getTemperatures(apiList) {
     chart.update()
 }
 
-function adamAjax() {
-    classChanger("adamButton")
+function ajaxMaker(type){
+    let url
+    if (type == 'adam') {
+        url = 'http://api.openweathermap.org/data/2.5/forecast?id=2759794&appid=9a7f046e8334b9ccd2878162b35dc767'
+    }
+    else if (type == 'moscow') {
+        url = 'http://api.openweathermap.org/data/2.5/forecast?id=5601538&appid=9a7f046e8334b9ccd2878162b35dc767'
+    }
+    else if (type == 'newYork') {
+        url = 'http://api.openweathermap.org/data/2.5/forecast?id=5128581&appid=9a7f046e8334b9ccd2878162b35dc767'
+    }
     $.ajax({
         method: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/forecast?id=2759794&appid=9a7f046e8334b9ccd2878162b35dc767',
+        url: url,
         success: function(response) {
             const APIArray = retrieveAPIData(response)
             getTemperatures(APIArray)
             displayTopRowData(APIArray)
-        },
-        error: function(response) {
-            console.log(response)
-        }
-    })
-    console.log('succesAdam!')
-}
-
-function moscowAjax() {
-    classChanger("moscowButton")
-    $.ajax({
-        method: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/forecast?id=5601538&appid=9a7f046e8334b9ccd2878162b35dc767',
-        success: function(response) {
-            const APIArray = retrieveAPIData(response)
-            getTemperatures(APIArray)
-            displayTopRowData(APIArray)
-        },
-        error: function(response) {
-            console.log(response)
-        }
-    })
-    console.log('succesMoscow!')
-}
-
-function newYorkAjax() {
-    classChanger("newYorkButton")
-    $.ajax({
-        method: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/forecast?id=5128581&appid=9a7f046e8334b9ccd2878162b35dc767',
-        success: function(response) {
-            const APIArray = retrieveAPIData(response)
-            getTemperatures(APIArray)
-            displayTopRowData(APIArray)
-        },
-        error: function(response) {
-            console.log(response)
         }
     })
 }
 
 function adam(){
-    statusObject.adam = true
-    statusObject.moscow = false
-    statusObject.newYork = false
-        /* adamAjax() */
-    Interval()
-    console.log('hoiA!')
+
+    status = 'adam'
+/*     ajaxMaker(status)
+    Interval() */
 }
 
 function moscow(){
-    statusObject.adam = false
-    statusObject.moscow = true
-    statusObject.newYork = false
-   /*  moscowAjax() */
-   Interval()
-    console.log('hoiM!')
+    $("moscowButton").addClass("active")
+    status = 'moscow'
+/*     ajaxMaker(status)
+    Interval() */
 }
 
 function newYork(){
-    statusObject.adam = false
-    statusObject.moscow = false
-    statusObject.newYork = true
-    /* newYorkAjax() */
-    Interval()
-    console.log('hoiNY!')
+    $("newYorkButton").addClass("active")
+    status = 'newYork'
+/*     ajaxMaker(status)
+    Interval() */
 }
