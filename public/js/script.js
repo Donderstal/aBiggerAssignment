@@ -82,7 +82,7 @@ function displayTopRowData(apiList) {
         displayTime(eTime)
         displayIcons(e.weather[0].icon)
         displayDate(eDate, eTime, index)
-        timeArray.push(eTime)
+        timeArray.push(eTime + ':00')
         index +=1
     })
     chart.data.labels = timeArray
@@ -91,13 +91,11 @@ function displayTopRowData(apiList) {
 
 //get temperatures, convert them to celsius and send them to chart's y axis
 function getTemperatures(apiList) {
-    const tempArray = []
-    apiList.forEach(e => {
-        tempCelsius = Math.round(e.main.temp - 273.15)
-        tempArray.push(tempCelsius)
+    const tempArray = apiList.map(e => {
+        return e = Math.round(e.main.temp - 273.15)
     })
     chart.data.datasets[0].data = tempArray
-    chart.update()
+    chart.update() 
 }
 
 
@@ -135,8 +133,8 @@ $(".nav-link").click(function(){
 //fire ajax and change status for Amsterdam
 function adam(){
     status = 'adam'
-/*     ajaxMaker(status)
-    Interval() */
+    ajaxMaker(status)
+    Interval()
 }
 
 //fire ajax and change status for Moscow
