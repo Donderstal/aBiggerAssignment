@@ -70,15 +70,12 @@ function displayTopRowData(apiList) {
     const timeRow = document.getElementById('timeRow')
     const imageRow = document.getElementById('imageRow')
     const dateRow = document.getElementById('dateRow')
-    timeRow.innerHTML = ""
-    imageRow.innerHTML = ""
-    dateRow.innerHTML = ""
+    $(".topRows").empty()
     let index = 0
     const timeArray = []
     apiList.forEach( e => {
-        const DateTimeText = e.dt_txt
-        let eDate = DateTimeText.split(' ')[0]
-        const eTime = DateTimeText.split(' ')[1].split(':')[0]
+        const eDate = e.dt_txt.split(' ')[0]
+        const eTime = e.dt_txt.split(' ')[1].split(':')[0]
         displayTime(eTime)
         displayIcons(e.weather[0].icon)
         displayDate(eDate, eTime, index)
