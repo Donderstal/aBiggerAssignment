@@ -3,3 +3,7 @@
     width: 5%;
     white-space: pre;
 }
+
+.active {
+    font-weight: bold;
+}

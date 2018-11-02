@@ -119,22 +119,26 @@ function ajaxMaker(type){
     })
 }
 
-function adam(){
+$(".nav-link").click(function(){
+    if ($(".nav-link").hasClass("active")) {
+        $(".nav-link").removeClass("active")
+    }
+        $(this).toggleClass("active")  
+})
 
+function adam(){
     status = 'adam'
 /*     ajaxMaker(status)
     Interval() */
 }
 
 function moscow(){
-    $("moscowButton").addClass("active")
     status = 'moscow'
 /*     ajaxMaker(status)
     Interval() */
 }
 
 function newYork(){
-    $("newYorkButton").addClass("active")
     status = 'newYork'
 /*     ajaxMaker(status)
     Interval() */
