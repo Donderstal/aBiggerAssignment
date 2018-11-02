@@ -1,9 +1,6 @@
 var ctx = document.getElementById('myChart').getContext('2d');
 var chart = new Chart(ctx, {
-    // The type of chart we want to create
     type: 'line',
-
-    // The data for our dataset
     data: {
         labels: [],
         datasets: [{
@@ -15,9 +12,16 @@ var chart = new Chart(ctx, {
         }],
         
     },
-
-    // Configuration options go here
     options: {
+        tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+                label: function(tooltipItems, data) { 
+                    return ' ' + tooltipItems.yLabel + ' °C ' + descArray[tooltipItems.index]
+                }
+            }
+        },
         legend: {
             display: false
         },

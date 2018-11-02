@@ -5,6 +5,7 @@ $( document ).ready(
 //Status variable to determine interval on active tab
 let status
 
+//set ten minute interval depending on status
 function Interval() {
     let interval
     clearInterval(interval)
@@ -95,6 +96,15 @@ function getTemperatures(apiList) {
     chart.update() 
 }
 
+//get weather descriptions for use in tooltip
+function getDescriptions(apiList) {
+    let descArray = []
+    apiList.forEach(e => {
+        descArray.push(e.weather[0].description)
+    })
+    return descArray
+}
+
 
 //ajax constructer function
 function ajaxMaker(type){
@@ -113,6 +123,7 @@ function ajaxMaker(type){
         url: url,
         success: function(response) {
             const APIArray = retrieveAPIData(response)
+            descArray = getDescriptions(APIArray)
             getTemperatures(APIArray)
             displayTopRowData(APIArray)
         }
