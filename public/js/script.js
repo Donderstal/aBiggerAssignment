@@ -2,6 +2,7 @@ $( document ).ready(
     setTimeout(adam, 100),
 )
 
+//Status variable to determine interval on active tab
 let status
 
 function Interval() {
@@ -24,16 +25,14 @@ function Interval() {
     }
 }
 
+// retrieve Api data and structure it properly by removing every second entry in array
 function retrieveAPIData(api) {
-    const newArray = []
-    for (i = 0; i < api.list.length; i++)  {
-        if (i % 2 == 0) {
-            newArray.push(api.list[i])
-        }
-    }
-    return newArray
+    return newArray = api.list.filter(e => {
+        return (api.list.indexOf(e) % 2 == 0)
+    })
 }
 
+//Display time in text nodes
 function displayTime(time) {
     const span = document.createElement('span')
     span.classList.add('timeSpan')
@@ -42,6 +41,7 @@ function displayTime(time) {
     timeRow.appendChild(span)
 }
 
+//Display dates and weekdays in text node
 function displayDate(date, time, index) {
     const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     dateArray = date.split('-')
@@ -57,6 +57,7 @@ function displayDate(date, time, index) {
     dateRow.appendChild(span)
 }
 
+//Display weather icons from openweathermap
 function displayIcons(icon) {
     const img = document.createElement('img')
     img.classList.add('timeSpan')
@@ -64,6 +65,7 @@ function displayIcons(icon) {
     imageRow.appendChild(img)
 }
 
+//Structure api data and display them on page using the above three helper functions
 function displayTopRowData(apiList) {
     const timeRow = document.getElementById('timeRow')
     const imageRow = document.getElementById('imageRow')
@@ -87,6 +89,7 @@ function displayTopRowData(apiList) {
     chart.update()
 }
 
+//get temperatures, convert them to celsius and send them to chart's y axis
 function getTemperatures(apiList) {
     const tempArray = []
     apiList.forEach(e => {
@@ -97,6 +100,8 @@ function getTemperatures(apiList) {
     chart.update()
 }
 
+
+//ajax constructer function
 function ajaxMaker(type){
     let url
     if (type == 'adam') {
@@ -119,6 +124,7 @@ function ajaxMaker(type){
     })
 }
 
+//toggle active class on click
 $(".nav-link").click(function(){
     if ($(".nav-link").hasClass("active")) {
         $(".nav-link").removeClass("active")
@@ -126,18 +132,21 @@ $(".nav-link").click(function(){
         $(this).toggleClass("active")  
 })
 
+//fire ajax and change status for Amsterdam
 function adam(){
     status = 'adam'
 /*     ajaxMaker(status)
     Interval() */
 }
 
+//fire ajax and change status for Moscow
 function moscow(){
     status = 'moscow'
 /*     ajaxMaker(status)
     Interval() */
 }
 
+//fire ajax and change status for New York
 function newYork(){
     status = 'newYork'
 /*     ajaxMaker(status)
