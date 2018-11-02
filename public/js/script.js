@@ -42,7 +42,7 @@ function displayTime(time) {
 }
 
 //Display dates and weekdays in text node
-function displayDate(date, time, index) {
+function displayDate(date, time, index, dateRow) {
     const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     dateArray = date.split('-')
     weekDaysDate = new Date(dateArray[0], (dateArray[1] - 1), dateArray[2])
@@ -67,9 +67,8 @@ function displayIcons(icon) {
 
 //Structure api data and display them on page using the above three helper functions
 function displayTopRowData(apiList) {
-    const timeRow = document.getElementById('timeRow')
-    const imageRow = document.getElementById('imageRow')
     const dateRow = document.getElementById('dateRow')
+    const dateRow2 = document.getElementById('dateRow2')
     $(".topRows").empty()
     let index = 0
     const timeArray = []
@@ -78,7 +77,8 @@ function displayTopRowData(apiList) {
         const eTime = e.dt_txt.split(' ')[1].split(':')[0]
         displayTime(eTime)
         displayIcons(e.weather[0].icon)
-        displayDate(eDate, eTime, index)
+        displayDate(eDate, eTime, index, dateRow)
+        displayDate(eDate, eTime, index, dateRow2)
         timeArray.push(eTime + ':00')
         index +=1
     })
@@ -137,13 +137,13 @@ function adam(){
 //fire ajax and change status for Moscow
 function moscow(){
     status = 'moscow'
-/*     ajaxMaker(status)
-    Interval() */
+    ajaxMaker(status)
+    Interval()
 }
 
 //fire ajax and change status for New York
 function newYork(){
     status = 'newYork'
-/*     ajaxMaker(status)
-    Interval() */
+    ajaxMaker(status)
+    Interval()
 }

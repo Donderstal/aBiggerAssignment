@@ -31,13 +31,7 @@ var chart = new Chart(ctx, {
                     display: true,
                     labelString: 'degrees Celsius'
                 }
-            }],
-            xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    labelString: 'time'
-                }
-            }],
+            }]
         }
     }
 });
