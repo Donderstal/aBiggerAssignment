@@ -17,7 +17,7 @@ var chart = new Chart(ctx, {
             enabled: true,
             mode: 'single',
             callbacks: {
-                label: function(tooltipItems, data) { 
+                label: function(tooltipItems) { 
                     return ' ' + tooltipItems.yLabel + ' °C ' + descArray[tooltipItems.index]
                 }
             }
